@@ -1,3 +1,4 @@
+import sqlite3
 class TweetAnalyzer:
     def __init__(self, db_path):
         self.conn = sqlite3.connect(db_path)
@@ -36,3 +37,9 @@ analyzer = TweetAnalyzer('tweets.db')
 top_named_entities = analyzer.get_top_named_entities(sentiment='positive', num_entities=10)
 for named_entity, count in top_named_entities:
     print(named_entity, count)
+analyzer = TweetAnalyzer('tweets.db')
+top_named_entities = analyzer.get_top_named_entities(sentiment='positive', num_entities=10)
+
+print("\n📊 Top Named Entities in Positive Tweets:\n")
+for i, (named_entity, count) in enumerate(top_named_entities, 1):
+    print(f"{i:>2}. {named_entity:<15} ➜ {count} mentions")
